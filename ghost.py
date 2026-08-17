@@ -1,4 +1,4 @@
-# ghost_anomalie_final.py - Version COMPLÈTE avec TOUTES les commandes
+# ghost.py
 import socket
 import threading
 import tkinter as tk
