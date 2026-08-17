@@ -3,7 +3,7 @@ name: Build & Release Ghost Anomalie
 on:
   push:
     tags:
-      - 'v*'
+      - '*'
   workflow_dispatch:
 
 env:
@@ -67,15 +67,11 @@ jobs:
             exit 1
           }
       
-      # ===== 7. Create ZIP =====
+      # ===== 7. Create ZIP (SEULEMENT L'EXE) =====
       - name: Create ZIP package
         run: |
           mkdir release_package
           copy dist\${{ env.APP_NAME }}.exe release_package\
-          copy README.md release_package\ 2>nul || echo "README.md not found"
-          copy FRANCAIS.md release_package\ 2>nul || echo "FRANCAIS.md not found"
-          copy SECURITY.md release_package\ 2>nul || echo "SECURITY.md not found"
-          copy LICENSE release_package\ 2>nul || echo "LICENSE not found"
           Compress-Archive -Path release_package\* -DestinationPath "${{ env.APP_NAME }}_${{ github.ref_name }}.zip"
           echo "ZIP created: ${{ env.APP_NAME }}_${{ github.ref_name }}.zip"
       
@@ -117,7 +113,7 @@ jobs:
             | File | Description |
             |------|-------------|
             | **GhostAnomalie.exe** | Full application (controller + generator) |
-            | **GhostAnomalie_${{ github.ref_name }}.zip** | Full package with documentation |
+            | **GhostAnomalie_${{ github.ref_name }}.zip** | Full package with EXE |
             
             ## Quick Start
             ```
@@ -218,14 +214,11 @@ jobs:
             
             ## Documentation
             
-            - README.md - Full documentation
-            - FRANCAIS.md - French version
-            - SECURITY.md - Security policy
+            - [README.md](https://github.com/${{ github.repository }}/blob/main/README.md) - Full documentation
             
             ## Bug Reports & Feedback
             
-            - Open an issue: GitHub Issues
-            - Discussions: GitHub Discussions
+            - Open an issue: [GitHub Issues](https://github.com/${{ github.repository }}/issues)
             
             ---
             
