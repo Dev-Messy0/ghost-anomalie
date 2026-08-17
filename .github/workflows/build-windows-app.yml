@@ -6,6 +6,11 @@ on:
       - '*'
   workflow_dispatch:
 
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
 env:
   APP_NAME: GhostAnomalie
   PYTHON_VERSION: '3.10'
@@ -84,7 +89,7 @@ jobs:
             dist\${{ env.APP_NAME }}.exe
             ${{ env.APP_NAME }}_${{ github.ref_name }}.zip
       
-      # ===== 9. Create Release (VERSION CORRIGÉE) =====
+      # ===== 9. Create Release =====
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
