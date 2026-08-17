@@ -103,7 +103,7 @@ Method 2: From Source
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/yourusername/ghost-anomalie.git
+git clone https://github.com/Dev-Messy0/ghost-anomalie.git
 cd ghost-anomalie
 
 # 2. Install dependencies
