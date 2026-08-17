@@ -2,10 +2,14 @@
 
 > **⚠️ IMPORTANT: This tool is for EDUCATIONAL PURPOSES ONLY. Use only on your own devices or with explicit written consent.**
 
-[![Version](https://img.shields.io/badge/version-1.3.0-brightgreen.svg)](https://github.com/Dev-Messy0/ghost-anomalie)
+[![Version](https://img.shields.io/badge/version-1.3.0-brightgreen.svg)](https://github.com/Dev-Messy0/ghost-anomalie/releases)
+[![Release](https://img.shields.io/github/release/Dev-Messy0/ghost-anomalie.svg)](https://github.com/Dev-Messy0/ghost-anomalie/releases)
+[![Downloads](https://img.shields.io/github/downloads/Dev-Messy0/ghost-anomalie/total.svg)](https://github.com/Dev-Messy0/ghost-anomalie/releases)
 [![License](https://img.shields.io/badge/license-EDUCATIONAL%20ONLY-red.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/)
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)]()
+[![Stars](https://img.shields.io/github/stars/Dev-Messy0/ghost-anomalie.svg)](https://github.com/Dev-Messy0/ghost-anomalie/stargazers)
+[![Issues](https://img.shields.io/github/issues/Dev-Messy0/ghost-anomalie.svg)](https://github.com/Dev-Messy0/ghost-anomalie/issues)
 
 ---
 
@@ -27,10 +31,10 @@
 
 **Ghost Anomalie** is a comprehensive remote administration and cybersecurity education tool designed for:
 
-- System administrators managing multiple machines
-- Cybersecurity students learning about RATs and network security
-- Penetration testing on authorized systems
-- Educational demonstrations in controlled environments
+- 🖥️ **System administrators** managing multiple machines
+- 🎓 **Cybersecurity students** learning about RATs and network security
+- 🛡️ **Penetration testing** on authorized systems
+- 📚 **Educational demonstrations** in controlled environments
 
 ### What Makes Ghost Anomalie Different?
 
@@ -42,6 +46,7 @@
 | 📦 **All-in-One** | Controller + Client generator in a single EXE |
 | 👻 **Stealth Options** | Learn how persistence and hiding techniques work |
 | 🎯 **Real-World Skills** | Practice security concepts in a controlled environment |
+| 🔧 **Auto-Build** | GitHub Actions automatically compiles EXE on release |
 
 ---
 
@@ -75,12 +80,18 @@
 - **Process Hiding** - Understand stealth techniques
 - **Anti-Debug Protection** - See how malware avoids analysis
 - **Anti-VM Detection** - Detect virtual environments
+- **Polymorphism** - Change file hash to avoid detection
 
 ### 🌐 Network Tools
 - **Network Scanner** - Discover devices on local networks
 - **Port Scanner** - Identify open ports and services
 - **WiFi Management** - View and connect to wireless networks
 - **DNS Tools** - Flush cache and troubleshoot DNS
+
+### 🔧 Auto-Build with GitHub Actions
+- **Automatic Compilation** - Push a tag, get an EXE
+- **Release Ready** - EXE uploaded to Releases automatically
+- **CI/CD Pipeline** - Build, test, and release in one workflow
 
 ---
 
@@ -93,10 +104,9 @@
 
 ### Method 1: Pre-compiled EXE (Recommended)
 ```bash
-# 1. Download the latest release from GitHub
-# 2. Extract the ZIP file
-# 3. Run GhostAnomalie.exe
-# 4. No installation required - portable application!
+# 1. Go to Releases: https://github.com/Dev-Messy0/ghost-anomalie/releases
+# 2. Download the latest GhostAnomalie.exe
+# 3. Double-click to run - No installation required!
 ```
 
 Method 2: From Source
@@ -201,8 +211,8 @@ upload <name> <content> Upload file
 
 Command Description
 souris_move <x> <y> Move mouse (0-1)
-`souris_click <1 2
-`souris_scroll <up down>`
+souris_click <1\|2\|3> Click mouse button
+souris_scroll <up\|down> Scroll
 souris_glisser <x1> <y1> <x2> <y2> Drag and drop
 clavier_texte <text> Type text
 clavier_touche <key> Press key
@@ -382,7 +392,7 @@ A: Yes, for personal educational use. Redistribution must include this license.
 
 Q: What if I find a bug?
 
-A: Open an issue on GitHub or contact us via email.
+A: Open an issue on GitHub Issues.
 
 Q: Is this a virus?
 
@@ -391,6 +401,10 @@ A: No, it's an educational tool. However, antivirus software may flag it because
 Q: Can I use this commercially?
 
 A: No, commercial use is strictly prohibited.
+
+Q: How do I download the latest EXE?
+
+A: Go to Releases and download GhostAnomalie.exe.
 
 ---
 
@@ -428,7 +442,7 @@ What We Don't Accept
 ```
 GHOST ANOMALIE - Educational License v1.0
 
-Copyright (c) 2026 Dev Messy
+Copyright (c) 2024-2026 Dev Messy
 
 Permission is hereby granted for EDUCATIONAL PURPOSES ONLY.
 The software may be used, studied, and modified for:
@@ -451,6 +465,7 @@ Any illegal use is the sole responsibility of the user.
 · Documentation: Wiki
 · Issues: GitHub Issues
 · Discussions: GitHub Discussions
+· Releases: GitHub Releases
 
 ---
 
@@ -475,8 +490,17 @@ Any illegal use is the sole responsibility of the user.
 📊 Version History
 
 Version Date Changes
-1.3.0 2026 Complete rewrite, 92 commands, EXE generator
+2.0.0 2026 Complete rewrite, 92 commands, EXE generator, GitHub Actions auto-build
+1.3.0 2025 Added camera, microphone, keylogger, password extraction
 1.0.0 2025 Initial release
+
+---
+
+📦 Download
+
+File Description
+GhostAnomalie.exe Full application (portable)
+Source Code Complete source code
 
 ---
 
@@ -486,12 +510,13 @@ Version Date Changes
 
 🏁 Quick Links
 
-⬆ Back to Top |
-Features |
-Installation |
-Commands |
-Security |
-License
+⬆ Back to Top •
+Features •
+Installation •
+Commands •
+Security •
+License •
+Download
 
 ---
 
