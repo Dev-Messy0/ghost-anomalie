@@ -496,16 +496,3 @@ License
 ---
 
 Made with ❤️ for the cybersecurity community
-
-**Structure finale :**
-bash```
-Ghost_Anomalie/
-├── ghost.py
-├── build_ghost.py
-├── compile.bat
-├── README.md     
-├── FRANÇAIS.md
-├── SECURITY.md
-├── requirements.txt
-└── LICENSE
-```
