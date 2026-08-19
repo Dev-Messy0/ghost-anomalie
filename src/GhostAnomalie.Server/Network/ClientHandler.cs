@@ -1,5 +1,6 @@
 using GhostAnomalie.Common.Packets;
 using GhostAnomalie.Common.Utils;
+using GhostAnomalie.Server.Forms;
 using System.Net.Sockets;
 using System.Text.Json;
 
@@ -23,7 +24,7 @@ namespace GhostAnomalie.Server.Network
             _mainForm = mainForm;
             _password = password;
 
-            var endpoint = tcpClient.Client.RemoteEndPoint as IPEndPoint;
+            var endpoint = tcpClient.Client.RemoteEndPoint as System.Net.IPEndPoint;
             IpAddress = endpoint?.Address?.ToString() ?? "Unknown";
         }
 
@@ -114,11 +115,7 @@ namespace GhostAnomalie.Server.Network
         {
             if (!_isAuthenticated || packet == null) return;
 
-            // Rediriger vers le MainForm pour traitement
             _mainForm.Log($"📥 Commande reçue de {ClientId}: {packet.Command}");
-
-            // Ici on peut ajouter un système de réponse automatique
-            // ou laisser le MainForm gérer l'envoi de la réponse
         }
 
         public async Task SendCommand(CommandPacket packet)
