@@ -1,0 +1,22 @@
+# Dossiers de compilation
+bin/
+obj/
+publish/
+release/
+clients/
+logs/
+captures/
+
+# Fichiers système
+*.exe
+*.dll
+*.pdb
+*.user
+*.suo
+
+# IDE
+.vs/
+*.vscode/
+
+# Dépendances
+packages/
