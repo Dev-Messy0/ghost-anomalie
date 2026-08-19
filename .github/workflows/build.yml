@@ -1,10 +1,10 @@
-name: 🚀 Build Ghost Anomalie
+name: Build Ghost Anomalie
 
 on:
   push:
     tags:
-      - 'v*'              # Déclenché quand tu pousses un tag comme v1.0.0
-  workflow_dispatch:       # Permet de lancer manuellement depuis l'interface GitHub
+      - 'v*'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -18,32 +18,27 @@ env:
 
 jobs:
   build:
-    name: 🪟 Build Windows Application
+    name: Build Windows Application
     runs-on: windows-latest
     
     steps:
-      # ===== 1. Récupérer le code =====
-      - name: 📥 Checkout code
+      - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
       
-      # ===== 2. Configurer .NET =====
-      - name: 🎯 Setup .NET
+      - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '6.0.x'
       
-      # ===== 3. Restaurer les dépendances =====
-      - name: 📦 Restore dependencies
+      - name: Restore dependencies
         run: dotnet restore GhostAnomalie.sln
       
-      # ===== 4. Build la solution =====
-      - name: 🔧 Build solution
+      - name: Build solution
         run: dotnet build GhostAnomalie.sln --configuration ${{ env.CONFIGURATION }} --no-restore
       
-      # ===== 5. Publier l'application =====
-      - name: 📦 Publish application
+      - name: Publish application
         run: |
           dotnet publish src/GhostAnomalie.Server/GhostAnomalie.Server.csproj `
             --configuration ${{ env.CONFIGURATION }} `
@@ -53,25 +48,20 @@ jobs:
             -p:DebugType=none `
             -p:DebugSymbols=false
       
-      # ===== 6. Créer le ZIP =====
-      - name: 📦 Create ZIP package
+      - name: Create ZIP package
         run: |
           mkdir release
           copy publish\GhostAnomalie.exe release\
-          echo "📦 Package created" >> release/info.txt
-          echo "Ghost Anomalie v${{ env.VERSION }}" >> release/info.txt
-          echo "Build date: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')" >> release/info.txt
+          echo "Ghost Anomalie v${{ env.VERSION }}" > release/info.txt
           Compress-Archive -Path release\* -DestinationPath release\GhostAnomalie_${{ env.VERSION }}.zip
       
-      # ===== 7. Upload des artefacts =====
-      - name: 📤 Upload artifacts
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: GhostAnomalie
           path: release/
       
-      # ===== 8. Créer la Release sur GitHub =====
-      - name: 🚀 Create GitHub Release
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
@@ -82,85 +72,69 @@ jobs:
           tag_name: ${{ github.ref_name }}
           name: Ghost Anomalie ${{ github.ref_name }}
           body: |
-            # 👻 Ghost Anomalie ${{ github.ref_name }}
+            # Ghost Anomalie ${{ github.ref_name }}
             
-            > **⚠️ WARNING: EDUCATIONAL PURPOSE ONLY - Use on your own devices or with explicit written consent.**
+            > **WARNING: EDUCATIONAL PURPOSE ONLY - Use on your own devices or with explicit written consent.**
             
-            ## 🚀 What's New
+            ## What's New
             
-            - 🖥️ **Full Remote Control** - Complete administration suite
-            - 🔐 **Secure & Stealthy** - Encrypted communication
-            - 🎯 **Integrated Client Builder** - Generate custom clients in one click
-            - 📡 **Dark Modern Interface** - Professional hacker-style UI
-            - ⚡ **Fast & Lightweight** - Only ~3-5 MB
+            - Full Remote Control - Complete administration suite
+            - Secure and Stealthy - Encrypted communication
+            - Integrated Client Builder - Generate custom clients in one click
+            - Dark Modern Interface - Professional hacker-style UI
+            - Fast and Lightweight - Only 3-5 MB
             
-            ## 📥 Download
+            ## Download
             
             | File | Description |
             |------|-------------|
-            | **GhostAnomalie.exe** | Controller application (Windows) |
-            | **GhostAnomalie_${{ env.VERSION }}.zip** | Complete package |
+            | GhostAnomalie.exe | Controller application (Windows) |
+            | GhostAnomalie_${{ env.VERSION }}.zip | Complete package |
             
-            ## 🔧 Quick Start
+            ## Quick Start
             
-Launch GhostAnomalie.exe
-
-Configure port and password
-
-Click "START SERVER"
-
-Go to "Builder" tab
-
-Configure server IP
-
-Click "GENERATE CLIENT .EXE"
-
-Deploy client to target machine
-
-Control from the server!
-
-text
-
-## 📋 Commands Available
-
-| Command | Description |
-|---------|-------------|
-| `screenshot` | 📸 Capture remote screen |
-| `sysinfo` | 💻 Get system information |
-| `cmd` | ⌨️ Execute system command |
-| `ls` | 📁 List files |
-| `shutdown` | ⏻ Shutdown PC |
-| `restart` | 🔄 Restart PC |
-| `lock` | 🔒 Lock workstation |
-| `ping` | 🏓 Ping client |
-| `exit` | 🔌 Disconnect |
-
-## ⚠️ Legal Notice
-
-**This tool is for EDUCATIONAL PURPOSES ONLY.**
-
-By using this software, you agree to:
-- Use only on your own devices
-- Use for cybersecurity learning
-- NEVER use on devices without consent
-- NEVER use for illegal activities
-
-## 🇬🇦 Special Thanks
-
-*Made with ❤️ by Dev Messy from Gabon*
-
----
-
-📚 Full documentation: [README.md](https://github.com/${{ github.repository }}/blob/main/README.md)
-
-🐛 Report issues: [GitHub Issues](https://github.com/${{ github.repository }}/issues)
-env:
-GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-# ===== 9. Notification finale =====
-- name: ✅ Build Complete
-run: |
-echo "🎉 Build completed successfully!"
-echo "📁 EXE: release/GhostAnomalie.exe"
-echo "📦 ZIP: release/GhostAnomalie_${{ env.VERSION }}.zip"
-echo "🚀 Release: https://github.com/${{ github.repository }}/releases/tag/${{ github.ref_name }}"
+            1. Launch GhostAnomalie.exe
+            2. Configure port and password
+            3. Click START SERVER
+            4. Go to Builder tab
+            5. Configure server IP
+            6. Click GENERATE CLIENT .EXE
+            7. Deploy client to target machine
+            8. Control from the server
+            
+            ## Commands Available
+            
+            | Command | Description |
+            |---------|-------------|
+            | screenshot | Capture remote screen |
+            | sysinfo | Get system information |
+            | cmd | Execute system command |
+            | ls | List files |
+            | shutdown | Shutdown PC |
+            | restart | Restart PC |
+            | lock | Lock workstation |
+            | ping | Ping client |
+            | exit | Disconnect |
+            
+            ## Legal Notice
+            
+            This tool is for EDUCATIONAL PURPOSES ONLY.
+            
+            By using this software, you agree to:
+            - Use only on your own devices
+            - Use for cybersecurity learning
+            - NEVER use on devices without consent
+            - NEVER use for illegal activities
+            
+            ---
+            
+            Made with love by Dev Messy from Gabon
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Build Complete
+        run: |
+          echo "Build completed successfully!"
+          echo "EXE: release/GhostAnomalie.exe"
+          echo "ZIP: release/GhostAnomalie_${{ env.VERSION }}.zip"
+          echo "Release: https://github.com/${{ github.repository }}/releases/tag/${{ github.ref_name }}"
