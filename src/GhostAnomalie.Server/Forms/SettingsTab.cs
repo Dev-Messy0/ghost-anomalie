@@ -8,7 +8,7 @@ namespace GhostAnomalie.Server.Forms
     {
         private MainForm _mainForm;
 
-        // === DÉCLARATION DES CHAMPS (AJOUTÉ) ===
+        // === CHAMPS ===
         private CustomTextBox _txtDefaultPort;
         private CustomTextBox _txtDefaultPassword;
         private CheckBox _chkAutoStart;
@@ -61,7 +61,7 @@ namespace GhostAnomalie.Server.Forms
             mainPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70));
 
             // Port
-            mainPanel.Controls.Add(CreateLabel("🔌 Port par défaut:"), 0, 0);
+            mainPanel.Controls.Add(CreateLabel("Port par defaut:"), 0, 0);
             _txtDefaultPort = new CustomTextBox
             {
                 Text = Constants.DefaultPort.ToString(),
@@ -71,7 +71,7 @@ namespace GhostAnomalie.Server.Forms
             mainPanel.Controls.Add(_txtDefaultPort, 1, 0);
 
             // Password
-            mainPanel.Controls.Add(CreateLabel("🔑 Mot de passe par défaut:"), 0, 1);
+            mainPanel.Controls.Add(CreateLabel("Mot de passe par defaut:"), 0, 1);
             _txtDefaultPassword = new CustomTextBox
             {
                 Text = Constants.DefaultPassword,
@@ -81,7 +81,7 @@ namespace GhostAnomalie.Server.Forms
             mainPanel.Controls.Add(_txtDefaultPassword, 1, 1);
 
             // Options
-            mainPanel.Controls.Add(CreateLabel("🛡️ Options:"), 0, 2);
+            mainPanel.Controls.Add(CreateLabel("Options:"), 0, 2);
             var optionsPanel = new Panel
             {
                 Dock = DockStyle.Fill,
@@ -90,7 +90,7 @@ namespace GhostAnomalie.Server.Forms
 
             _chkAutoStart = new CheckBox
             {
-                Text = "Démarrer le serveur au lancement",
+                Text = "Demarrer le serveur au lancement",
                 ForeColor = DarkTheme.SecondaryText,
                 BackColor = Color.Transparent,
                 Dock = DockStyle.Top,
@@ -108,7 +108,7 @@ namespace GhostAnomalie.Server.Forms
 
             _chkDarkTheme = new CheckBox
             {
-                Text = "Thème sombre (toujours activé)",
+                Text = "Theme sombre (toujours active)",
                 ForeColor = DarkTheme.SecondaryText,
                 BackColor = Color.Transparent,
                 Dock = DockStyle.Top,
@@ -132,7 +132,7 @@ namespace GhostAnomalie.Server.Forms
 
             _btnSave = new CustomButton
             {
-                Text = "💾 Sauvegarder",
+                Text = "Sauvegarder",
                 Width = 150,
                 Height = 35,
                 BackColor = DarkTheme.HighlightColor,
@@ -143,7 +143,7 @@ namespace GhostAnomalie.Server.Forms
 
             _btnReset = new CustomButton
             {
-                Text = "🔄 Réinitialiser",
+                Text = "Reinitialiser",
                 Width = 150,
                 Height = 35,
                 BackColor = DarkTheme.ControlColor,
@@ -158,7 +158,7 @@ namespace GhostAnomalie.Server.Forms
             mainPanel.Controls.Add(btnPanel, 1, 3);
 
             // About
-            mainPanel.Controls.Add(CreateLabel("📋 À propos:"), 0, 4);
+            mainPanel.Controls.Add(CreateLabel("A propos:"), 0, 4);
             _txtAbout = new RichTextBox
             {
                 Dock = DockStyle.Fill,
@@ -167,16 +167,16 @@ namespace GhostAnomalie.Server.Forms
                 Font = new Font("Segoe UI", 10),
                 ReadOnly = true,
                 BorderStyle = BorderStyle.None,
-                Text = $@"👻 Ghost Anomalie v{Constants.Version}
+                Text = $@"Ghost Anomalie v{Constants.Version}
 
 {Constants.Author}
 
-🔐 Sécurisé • Furtif • Puissant
+Securise - Furtif - Puissant
 
-⚡ Utilisation ÉDUCATIF uniquement
-📡 Ne pas utiliser sur des machines sans consentement
+Utilisation EDUCATIF uniquement
+Ne pas utiliser sur des machines sans consentement
 
-📚 Documentation: README.md
+Documentation: README.md
 "
             };
             mainPanel.Controls.Add(_txtAbout, 1, 4);
@@ -222,12 +222,12 @@ namespace GhostAnomalie.Server.Forms
                 };
 
                 ConfigManager.Save(config);
-                MessageBox.Show("✅ Paramètres sauvegardés !", "Succès",
+                MessageBox.Show("Parametres sauvegardes !", "Succes",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"❌ Erreur: {ex.Message}", "Erreur",
+                MessageBox.Show($"Erreur: {ex.Message}", "Erreur",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -238,7 +238,7 @@ namespace GhostAnomalie.Server.Forms
             _txtDefaultPassword.Text = Constants.DefaultPassword;
             _chkAutoStart.Checked = false;
             _chkSaveLogs.Checked = true;
-            MessageBox.Show("✅ Paramètres réinitialisés !", "Succès",
+            MessageBox.Show("Parametres reinitialises !", "Succes",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
