@@ -8,9 +8,6 @@
     <OutputType>WinExe</OutputType>
     <AssemblyName>GhostAnomalie</AssemblyName>
     <RootNamespace>GhostAnomalie.Server</RootNamespace>
-
-    <!-- LE MANIFESTE -->
-    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <ItemGroup>
